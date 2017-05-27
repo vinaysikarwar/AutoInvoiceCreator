@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <WTC_AIS>
+      <version>0.1.0</version>
+    </WTC_AIS>
+  </modules>
+  <global>
+    <helpers>
+      <ais>
+        <class>WTC_AIS_Helper</class>
+      </ais>
+    </helpers>
+	<models>
+	  <ais>
+		<class>WTC_AIS_Model</class>
+		<resourceModel>ais_mysql4</resourceModel>
+	  </ais>
+	</models>
+    <events>
+		<sales_order_place_after> <!-- identifier of the event we want to catch -->
+			<observers>
+			  <wtc_invoicer_automatically_complete_order> <!-- identifier of the event handler -->
+				<type>model</type> <!-- class method call type; valid are model, object and singleton -->
+				<class>ais/observer</class> <!-- observers class alias -->
+				<method>autoInvoice</method>  <!-- observer's method to be called -->
+				<args></args> <!-- additional arguments passed to observer -->
+			  </wtc_invoicer_automatically_complete_order>
+			</observers>
+		</sales_order_place_after>
+    </events>
+  </global>
+</config> 
